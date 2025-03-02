@@ -17,6 +17,8 @@ print(deeprec.test_score())
 sharedPath = r'C:\Users\R1nge\Documents\TELEGRAM\SHARED'
 prediction = deeprec.predict(f"{sharedPath}/1.oga")
 print(f"Prediction: {prediction}")
-
+data = {
+    "emotion": prediction
+}
 with open(f'{sharedPath}/emotions.json', 'w', encoding='utf-8') as f:
-    json.dump(prediction, f, ensure_ascii=False, indent=4)
+    json.dump(data, f, ensure_ascii=False, indent=4)

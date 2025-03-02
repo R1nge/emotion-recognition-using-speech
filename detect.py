@@ -14,8 +14,8 @@ print(deeprec.test_score())
 # OR periodically check for files
 
 
-sharedPath = r'C:\Users\R1nge\Documents\TELEGRAM\SHARED\1.oga'
-prediction = deeprec.predict(sharedPath)
+sharedPath = r'C:\Users\R1nge\Documents\TELEGRAM\SHARED'
+prediction = deeprec.predict(f"{sharedPath}/1.oga")
 print(f"Prediction: {prediction}")
 
 with open(f'{sharedPath}/emotions.json', 'w', encoding='utf-8') as f:

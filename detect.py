@@ -1,4 +1,5 @@
 from deep_emotion_recognition import DeepEmotionRecognizer
+import json
 # initialize instance
 # inherited from emotion_recognition.EmotionRecognizer
 # default parameters (LSTM: 128x2, Dense:128x2)
@@ -8,5 +9,14 @@ deeprec.train()
 # get the accuracy
 print(deeprec.test_score())
 # predict angry audio sample
-prediction = deeprec.predict('./data/validation/Actor_10/03-02-05-02-02-02-10_angry.wav')
+
+# I have 2 options, either run it every time I need
+# OR periodically check for files
+
+
+sharedPath = r'C:\Users\R1nge\Documents\TELEGRAM\SHARED\1.oga'
+prediction = deeprec.predict(sharedPath)
 print(f"Prediction: {prediction}")
+
+with open(f'{sharedPath}/emotions.json', 'w', encoding='utf-8') as f:
+    json.dump(prediction, f, ensure_ascii=False, indent=4)

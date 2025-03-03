@@ -8,6 +8,7 @@ print(deeprec.test_score())
 
 
 sharedPath = r'C:\Users\R1nge\Documents\TELEGRAM\SHARED'
+i = 0
 for file in os.listdir(sharedPath):
     if file.endswith(".oga"):
         # Analyze each file and save to a JSON
@@ -16,5 +17,6 @@ for file in os.listdir(sharedPath):
         data = {
             "emotion": prediction
         }
-        with open(os.path.join(sharedPath, f"{file}.json"), 'w', encoding='utf-8') as f:
+        with open(os.path.join(sharedPath, f"{i}.json"), 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
+        i += 1

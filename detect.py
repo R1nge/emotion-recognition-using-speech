@@ -39,6 +39,17 @@ while True:
                     json.dump(data, f, ensure_ascii=False, indent=4)
                 i += 1
 
+            if file.endswith(".mp4"):
+                prediction = deeprec.predict(os.path.join(sharedPath, file))
+                print(f"Prediction for {file}: {prediction}")
+                data = {
+                    "emotion": prediction
+                }
+                with open(os.path.join(sharedPath, f"{i}.json"), 'w', encoding='utf-8') as f:
+                    json.dump(data, f, ensure_ascii=False, indent=4)
+                    print(data)
+                i += 1
+
         state = {
             "state": "detection_finished"
         }

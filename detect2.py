@@ -33,7 +33,8 @@ for file in os.listdir(sharedPath):
         objs = DeepFace.analyze(
             img_path = f"{sharedPath}\{file}", 
             #actions = ['age', 'gender', 'race', 'emotion']
-            actions = ['emotion', 'gender']
+            actions = ['emotion', 'gender'],
+            enforce_detection=False
         )
         print(f"Prediction for {file}: {objs}")
         data = {

@@ -20,9 +20,13 @@ while True:
         state = json.loads(contents)
         print(state)
 
-    if state['state'] == "splitting_finished":        
+    if state['state'] == "splitting_finished":
+        state = {
+            "state": "detection_emotions"
+        }
+
         with open(statePathJson,'w', encoding='utf-8') as f:
-            json.dump(state, f ,ensure_ascii=False, indent=4)
+            json.dump(state, f,ensure_ascii=False, indent=4)        
 
         i = 0
         for file in os.listdir(sharedPath):

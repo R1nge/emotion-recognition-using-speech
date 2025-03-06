@@ -24,7 +24,7 @@ backends = [
 ]
 
 sharedPath = r'C:\Users\R1nge\Documents\TELEGRAM\SHARED'
-faceEmotions = os.path.join(sharedPath, "Gaze.bat")
+Gaze = os.path.join(sharedPath, "Gaze.bat")
 
 i = 0
 for file in os.listdir(sharedPath):
@@ -45,6 +45,15 @@ for file in os.listdir(sharedPath):
             json.dump(data, f, ensure_ascii=False, indent=4)
         i += 1
 
-result = subprocess.run([faceEmotions], shell=True)
+
+
+state = {
+            "state": "detection_finished"
+        }
+
+with open(statePathJson,'w', encoding='utf-8') as f:
+    json.dump(state, f,ensure_ascii=False, indent=4)
+
+result = subprocess.run([Gaze], shell=True)
 
 print(objs)

@@ -24,10 +24,6 @@ backends = [
 
 sharedPath = r'C:\Users\R1nge\Documents\TELEGRAM\SHARED'
 
-#split video into images, 1 image per 950ms
-#analyze each image
-#save to a file
-
 i = 0
 for file in os.listdir(sharedPath):
     if file.endswith(".png"):

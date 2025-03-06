@@ -2,10 +2,12 @@ from deep_emotion_recognition import DeepEmotionRecognizer
 import json
 import os
 import time
+import subprocess
 
 sharedPath = r'C:\Users\R1nge\Documents\TELEGRAM\SHARED'
 statePath = os.path.join(sharedPath, "STATE")
 statePathJson = os.path.join(statePath, "STATE.json")
+faceEmotions = os.path.join(sharedPath, "Emotions_Face.bat")
 
 # default parameters (LSTM: 128x2, Dense:128x2)
 deeprec = DeepEmotionRecognizer(emotions=['angry', 'sad', 'neutral', 'ps', 'happy'], n_rnn_layers=2, n_dense_layers=2, rnn_units=128, dense_units=128)
@@ -53,9 +55,11 @@ while True:
         state = {
             "state": "detection_finished"
         }
-        with open(statePathJson,'w', encoding='utf-8') as f:
-            json.dump(state, f,ensure_ascii=False, indent=4)
-        time.sleep(10)
+        #with open(statePathJson,'w', encoding='utf-8') as f:
+            #json.dump(state, f,ensure_ascii=False, indent=4)
+        time.sleep(2)
+        result = subprocess.run([faceEmotions], shell=True)
+        print(result)
     else:
         print("waiting")
         time.sleep(1)

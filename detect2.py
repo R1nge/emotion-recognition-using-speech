@@ -26,11 +26,12 @@ sharedPath = r'C:\Users\R1nge\Documents\TELEGRAM\SHARED'
 
 i = 0
 for file in os.listdir(sharedPath):
-    if file.endswith(".mp4"):
+    if file.endswith(".png"):
         # Analyze each file and save to a JSON
         objs = DeepFace.analyze(
-            img_path = "img.jpg", 
-            actions = ['age', 'gender', 'race', 'emotion']
+            img_path = f"{sharedPath}\{file}", 
+            #actions = ['age', 'gender', 'race', 'emotion']
+            actions = ['emotion']
         )
         print(f"Prediction for {file}: {objs}")
         data = objs[0]['dominant_emotion']

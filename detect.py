@@ -14,10 +14,6 @@ deeprec = DeepEmotionRecognizer(emotions=['angry', 'sad', 'neutral', 'ps', 'happ
 deeprec.train()
 print(deeprec.test_score())
 
-state = {
-            "state": "detection_started"
-        }
-
 while True:
     with open(statePathJson, 'r', encoding='utf-8') as f:
         contents = f.read()
@@ -52,11 +48,7 @@ while True:
                     print(data)
                 i += 1
 
-        state = {
-            "state": "detection_finished"
-        }
-        #with open(statePathJson,'w', encoding='utf-8') as f:
-            #json.dump(state, f,ensure_ascii=False, indent=4)
+
         time.sleep(2)
         result = subprocess.run([faceEmotions], shell=True)
         print(result)

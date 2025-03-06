@@ -1,6 +1,7 @@
 from deepface import DeepFace
 import json
 import os
+import subprocess
 
 sharedPath = r'C:\Users\R1nge\Documents\TELEGRAM\SHARED'
 statePath = os.path.join(sharedPath, "STATE")
@@ -23,6 +24,7 @@ backends = [
 ]
 
 sharedPath = r'C:\Users\R1nge\Documents\TELEGRAM\SHARED'
+faceEmotions = os.path.join(sharedPath, "Gaze.bat")
 
 i = 0
 for file in os.listdir(sharedPath):
@@ -43,11 +45,6 @@ for file in os.listdir(sharedPath):
             json.dump(data, f, ensure_ascii=False, indent=4)
         i += 1
 
-
-state = {
-            "state": "detection_finished"
-        }
-with open(statePathJson,'w', encoding='utf-8') as f:
-    json.dump(state, f,ensure_ascii=False, indent=4)
+result = subprocess.run([faceEmotions], shell=True)
 
 print(objs)

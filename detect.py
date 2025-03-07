@@ -14,6 +14,9 @@ deeprec = DeepEmotionRecognizer(emotions=['angry', 'sad', 'neutral', 'ps', 'happ
 deeprec.train()
 print(deeprec.test_score())
 
+
+results = []
+
 while True:
     with open(statePathJson, 'r', encoding='utf-8') as f:
         contents = f.read()
@@ -25,11 +28,12 @@ while True:
             "state": "detection_emotions"
         }
 
-        with open(statePathJson,'w', encoding='utf-8') as f:
-            json.dump(state, f,ensure_ascii=False, indent=4)        
+        media_files = os.listdir(sharedPath)
 
-        i = 0
-        for file in os.listdir(sharedPath):
+        with open(statePathJson,'w', encoding='utf-8') as f:
+            json.dump(state, f,ensure_ascii=False, indent=4)
+
+        for file in media_files:
             if file.endswith(".oga"):
                 # Analyze each file and save to a JSON
                 prediction = deeprec.predict(os.path.join(sharedPath, file))
@@ -37,9 +41,7 @@ while True:
                 data = {
                     "emotion": prediction
                 }
-                with open(os.path.join(sharedPath, f"{i}.json"), 'w', encoding='utf-8') as f:
-                    json.dump(data, f, ensure_ascii=False, indent=4)
-                i += 1
+                results.append(data)
 
             if file.endswith(".mp4"):
                 prediction = deeprec.predict(os.path.join(sharedPath, file))
@@ -47,11 +49,10 @@ while True:
                 data = {
                     "emotion": prediction
                 }
-                with open(os.path.join(sharedPath, f"{i}.json"), 'w', encoding='utf-8') as f:
-                    json.dump(data, f, ensure_ascii=False, indent=4)
-                    print(data)
-                i += 1
+                results.append(data)
 
+        with open(os.path.join(sharedPath, "emotions.json"),'w', encoding='utf-8') as f:
+            json.dump(results, f,ensure_ascii=False, indent=4)
 
         time.sleep(2)
         result = subprocess.run([faceEmotions], shell=True)

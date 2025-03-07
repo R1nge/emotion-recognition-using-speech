@@ -25,9 +25,11 @@ backends = [
 
 sharedPath = r'C:\Users\R1nge\Documents\TELEGRAM\SHARED'
 Gaze = os.path.join(sharedPath, "Gaze.bat")
+png_files = os.listdir(sharedPath)
+results = []
 
 i = 0
-for file in os.listdir(sharedPath):
+for file in png_files:
     if file.endswith(".png"):
         # Analyze each file and save to a JSON
         objs = DeepFace.analyze(
@@ -41,12 +43,14 @@ for file in os.listdir(sharedPath):
             "emotion": objs[0]['dominant_emotion'],
             "gender": objs[0]['dominant_gender']
         }
+
+        results.append(data)
         print(data)
-        with open(os.path.join(sharedPath, f"{i}_face.json"), 'w', encoding='utf-8') as f:
-            json.dump(data, f, ensure_ascii=False, indent=4)
         i += 1
 
 
+with open(os.path.join(sharedPath, f"face.json"), 'w', encoding='utf-8') as f:
+    json.dump(results, f, ensure_ascii=False, indent=4)
 
 state = {
             "state": "detection_finished"
